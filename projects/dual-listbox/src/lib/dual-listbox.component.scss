@@ -1,0 +1,44 @@
+
+.dlb-dual-listbox {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+
+  .dlb-column { flex: 1; display: flex; flex-direction: column; }
+  .dlb-header { display:flex; justify-content: space-between; align-items:center; margin-bottom:0.5rem; }
+  .title { font-weight: 600; font-size: 0.95rem; }
+
+  input[type="text"] { padding: 0.4rem; border: 1px solid #dcdcdc; border-radius: 4px; width: 40%; }
+
+  .dlb-list {
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+    overflow: auto;
+    ul { margin:0; padding:0; list-style:none; }
+    li.dlb-item {
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+      user-select: none;
+      &:hover { background: #f4f6fb; }
+      &.disabled { opacity: 0.5; cursor: not-allowed; }
+    }
+  }
+
+  .dlb-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    margin-top: 2.4rem;
+    .dlb-btn {
+      background: #ffffff;
+      border: 1px solid #d0d0d0;
+      padding: 0.35rem 0.5rem;
+      min-width: 40px;
+      border-radius: 4px;
+      cursor: pointer;
+      &:hover { background: #f0f7ff; }
+    }
+  }
+}

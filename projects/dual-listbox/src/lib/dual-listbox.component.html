@@ -1,0 +1,51 @@
+
+<div class="dlb-dual-listbox" role="group" aria-label="Dual listbox">
+  <div class="dlb-column dlb-left">
+    <div class="dlb-header">
+      <div class="title">{{ leftTitle }}</div>
+      <input *ngIf="enableSearch" type="text" [(ngModel)]="leftSearch" [placeholder]="placeholderLeft" aria-label="Search left" />
+    </div>
+
+    <div class="dlb-list" [style.height]="height" role="listbox" aria-multiselectable="true">
+      <ul>
+        <li *ngFor="let it of filteredLeft; trackBy: trackBy" class="dlb-item"
+            [class.disabled]="it.disabled"
+            (dblclick)="onDblClickLeft(it)"
+            (click)="selectedLeft = selectedLeft.includes(it) ? selectedLeft.filter(x => trackBy(x) !== trackBy(it)) : [...selectedLeft, it]">
+          <ng-container *ngIf="itemTemplate; else defaultItem">
+            <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: it }"></ng-container>
+          </ng-container>
+          <ng-template #defaultItem>{{ it.label }}</ng-template>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="dlb-controls" role="toolbar" aria-orientation="vertical">
+    <button type="button" class="dlb-btn" (click)="moveRight()" aria-label="Move selected right">›</button>
+    <button type="button" class="dlb-btn" (click)="moveAllRight()" aria-label="Move all right">»</button>
+    <button type="button" class="dlb-btn" (click)="moveLeft()" aria-label="Move selected left">‹</button>
+    <button type="button" class="dlb-btn" (click)="moveAllLeft()" aria-label="Move all left">«</button>
+  </div>
+
+  <div class="dlb-column dlb-right">
+    <div class="dlb-header">
+      <div class="title">{{ rightTitle }}</div>
+      <input *ngIf="enableSearch" type="text" [(ngModel)]="rightSearch" [placeholder]="placeholderRight" aria-label="Search right" />
+    </div>
+
+    <div class="dlb-list" [style.height]="height" role="listbox" aria-multiselectable="true">
+      <ul>
+        <li *ngFor="let it of filteredRight; trackBy: trackBy" class="dlb-item"
+            [class.disabled]="it.disabled"
+            (dblclick)="onDblClickRight(it)"
+            (click)="selectedRight = selectedRight.includes(it) ? selectedRight.filter(x => trackBy(x) !== trackBy(it)) : [...selectedRight, it]">
+          <ng-container *ngIf="itemTemplate; else defaultItemRight">
+            <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: it }"></ng-container>
+          </ng-container>
+          <ng-template #defaultItemRight>{{ it.label }}</ng-template>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
