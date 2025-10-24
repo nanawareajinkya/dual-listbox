@@ -1,0 +1,77 @@
+# ===================================================================
+# by @nanawareajinkya — Dual Listbox NPM Package
+# ===================================================================
+
+# Node & build artifacts
+node_modules/
+dist/
+out-tsc/
+.tmp/
+temp/
+.DS_Store
+Thumbs.db
+
+# Build logs & npm cache
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+# (optional) if you want CI to generate its own lockfile, uncomment above
+
+# Angular & CLI
+.angular/
+.angular/cache/
+.angular-devkit/
+coverage/
+*.ngsummary.json
+
+# Environment files
+src/environments/environment*.ts
+projects/**/src/environments/environment*.ts
+
+# IDE / OS / Editor junk
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+
+# Test output
+karma-*.log
+coverage/
+test-results/
+junit.xml
+
+# Reports & temporary artifacts
+reports/
+*.report
+*.tgz
+*.zip
+*.tar
+*.tar.gz
+
+# CI/CD local cache
+.github/workflows/*.log
+.cache/
+.nyc_output/
+.eslintcache
+.husky/_/
+
+# GitHub Pages / build previews
+docs/
+storybook-static/
+demo-app/dist/
+
+# Miscellaneous
+*.iml
+*.sublime-project
+*.sublime-workspace
+
+# VSCode settings (keep only useful files)
+.vscode/settings.json
+.vscode/launch.json
+!.vscode/tasks.json
