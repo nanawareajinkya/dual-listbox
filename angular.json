@@ -21,7 +21,9 @@
               "projects/demo-app/src/favicon.ico",
               "projects/demo-app/src/assets"
             ],
-            "styles": ["projects/demo-app/src/styles.scss"],
+            "styles": [
+              "projects/demo-app/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -108,7 +110,9 @@
     }
   },
   "cli": {
-    "analytics": false
-  },
-  "defaultProject": "demo-app"
+    "analytics": false,
+    "warnings": {
+      "versionMismatch": false
+    }
+  }
 }
