@@ -1,4 +1,3 @@
-# ===================================================================
 # by @nanawareajinkya — Dual Listbox NPM Package
 # ===================================================================
 
@@ -15,8 +14,9 @@ Thumbs.db
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-package-lock.json
-# (optional) if you want CI to generate its own lockfile, uncomment above
+# Keep package-lock.json for reproducible CI builds
+# (Uncomment below ONLY if you want CI to regenerate it)
+# package-lock.json
 
 # Angular & CLI
 .angular/
@@ -75,3 +75,5 @@ demo-app/dist/
 .vscode/settings.json
 .vscode/launch.json
 !.vscode/tasks.json
+
+# ===================================================================
