@@ -5,3 +5,8 @@ export interface DualListItem<T = any> {
   disabled?: boolean;
   meta?: any;
 }
+
+export interface DualListChange<T = any> {
+  left: DualListItem<T>[];
+  right: DualListItem<T>[];
+}
