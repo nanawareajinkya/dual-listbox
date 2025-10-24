@@ -48,9 +48,8 @@ jobs:
       # 4️⃣ Lint (non-blocking)
       #    Ensures code quality without failing CI for harmless warnings
       # -------------------------------------------------------------
-      - name: Run ESLint (non-blocking)
-        run: |
-          npm run lint --if-present || echo "✅ Lint warnings ignored (no blocking issues found)."
+      - name: Lint
+        run: npm run lint --if-present
 
       # -------------------------------------------------------------
       # 5️⃣ Build the Angular library
