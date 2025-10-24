@@ -3,22 +3,14 @@
   <div class="dlb-panel">
     <h4 class="dlb-header">{{ leftTitle }}</h4>
 
-    <input
-      *ngIf="enableSearch"
-      type="text"
-      class="dlb-search"
-      [(ngModel)]="leftSearch"
-      [placeholder]="placeholderLeft"
-    />
+    <input *ngIf="enableSearch" type="text" class="dlb-search" [(ngModel)]="leftSearch"
+      [placeholder]="placeholderLeft" />
 
     <ul class="dlb-list">
-      <li
-        *ngFor="let item of filteredLeft"
-        [class.selected]="selectedLeft.includes(item)"
-        [class.disabled]="item.disabled"
-        (click)="selectedLeft = toggleSelection(selectedLeft, item)"
-        (dblclick)="onDblClickLeft(item)"
-      >
+      <li *ngFor="let item of filteredLeft" [class.selected]="selectedLeft.includes(item)"
+        [class.disabled]="item.disabled" (click)="selectedLeft = toggleSelection(selectedLeft, item)"
+        (dblclick)="onDblClickLeft(item)" tabindex="0"
+        (keydown.enter)="selectedLeft = toggleSelection(selectedLeft, item)" (keyup.enter)="onDblClickLeft(item)">
         <ng-container *ngIf="!itemTemplate; else customItem">
           {{ item.label }}
         </ng-container>
@@ -41,22 +33,15 @@
   <div class="dlb-panel">
     <h4 class="dlb-header">{{ rightTitle }}</h4>
 
-    <input
-      *ngIf="enableSearch"
-      type="text"
-      class="dlb-search"
-      [(ngModel)]="rightSearch"
-      [placeholder]="placeholderRight"
-    />
+    <input *ngIf="enableSearch" type="text" class="dlb-search" [(ngModel)]="rightSearch"
+      [placeholder]="placeholderRight" />
 
     <ul class="dlb-list">
-      <li
-        *ngFor="let item of filteredRight"
-        [class.selected]="selectedRight.includes(item)"
-        [class.disabled]="item.disabled"
-        (click)="selectedRight = toggleSelection(selectedRight, item)"
-        (dblclick)="onDblClickRight(item)"
-      >
+      <li *ngFor="let item of filteredRight" [class.selected]="selectedRight.includes(item)"
+        [class.disabled]="item.disabled" (click)="selectedRight = toggleSelection(selectedRight, item)"
+        (dblclick)="onDblClickRight(item)" tabindex="0"
+        (keydown.enter)="selectedRight = toggleSelection(selectedRight, item)" (keyup.enter)="onDblClickRight(item)">
+
         <ng-container *ngIf="!itemTemplate; else customItemRight">
           {{ item.label }}
         </ng-container>
