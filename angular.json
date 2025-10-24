@@ -24,6 +24,29 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": { "browserTarget": "demo-app:build" }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/demo-app/src/test.ts",
+            "karmaConfig": "projects/demo-app/karma.conf.js",
+            "polyfills": [],
+            "tsConfig": "projects/demo-app/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "dual-listbox": {
+      "projectType": "library",
+      "root": "projects/dual-listbox",
+      "sourceRoot": "projects/dual-listbox/src",
+      "architect": {
+        "build": {
+          "builder": "ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/dual-listbox/tsconfig.lib.json",
+            "project": "projects/dual-listbox/ng-package.json"
+          }
         }
       }
     }

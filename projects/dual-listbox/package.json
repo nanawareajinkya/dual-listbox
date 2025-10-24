@@ -1,10 +1,10 @@
 {
   "name": "@nanawareajinkya/dual-listbox",
-  "version": "0.0.1",
-  "description": "Beautiful, accessible, and customizable Dual Listbox for Angular \u2014 with search, keyboard support, and minimal CSS.",
+  "version": "0.1.0",
+  "description": "Minimal, accessible Dual Listbox for Angular \u2014 searchable, keyboard-friendly, and customizable.",
   "homepage": "https://github.com/nanawareajinkya/dual-listbox",
   "license": "MIT",
-  "author": "Ajinkya Nanaware <nanawareajinkya46@gmail.com> (https://github.com/nanawareajinkya)",
+  "author": "Ajinkya Nanaware <nanawareajinkya46@gmail.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nanawareajinkya/dual-listbox.git"
@@ -12,10 +12,9 @@
   "keywords": [
     "angular",
     "dual-listbox",
-    "picklist",
     "component",
     "ui",
-    "searchable"
+    "picklist"
   ],
   "peerDependencies": {
     "@angular/core": ">=20.0.0 <22.0.0",
