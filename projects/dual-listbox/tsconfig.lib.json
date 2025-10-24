@@ -1,0 +1,26 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/lib",
+    "target": "ES2022",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true, 
+    "inlineSources": true,
+    "types": [],
+    "lib": ["ES2022", "DOM"],
+    "moduleResolution": "node",
+    "module": "ES2022",
+    "skipLibCheck": true,
+    "strict": true,
+    "importHelpers": true,
+    "noImplicitOverride": true
+  },
+  "angularCompilerOptions": {
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "enableResourceInlining": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/test.ts", "**/*.spec.ts"]
+}

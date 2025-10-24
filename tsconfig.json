@@ -1,9 +1,11 @@
-
 {
-  "extends": "./tsconfig.base.json",
-  "compileOnSave": false,
   "files": [],
   "references": [
-    { "path": "projects/dual-listbox/tsconfig.lib.json" }
-  ]
+    { "path": "projects/dual-listbox/tsconfig.lib.json" },
+    { "path": "projects/demo-app" }
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true
+  }
 }
