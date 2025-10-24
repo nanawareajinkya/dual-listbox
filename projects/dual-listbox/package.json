@@ -1,23 +1,45 @@
 {
   "name": "@nanawareajinkya/dual-listbox",
-  "version": "0.1.0",
-  "description": "Minimal, accessible Dual Listbox for Angular \u2014 searchable, keyboard-friendly, and customizable.",
-  "homepage": "https://github.com/nanawareajinkya/dual-listbox",
-  "license": "MIT",
-  "author": "Ajinkya Nanaware <nanawareajinkya46@gmail.com>",
+  "version": "1.0.0",
+  "description": "A modern, lightweight, and customizable dual listbox component for Angular 17+ — built with accessibility, performance, and minimal dependencies in mind.",
+  "author": {
+    "name": "Ajinkya Nanaware",
+    "email": "nanawareajinkya46@gmail.com",
+    "url": "https://github.com/nanawareajinkya"
+  },
+  "homepage": "https://github.com/nanawareajinkya/dual-listbox#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nanawareajinkya/dual-listbox.git"
+    "url": "https://github.com/nanawareajinkya/dual-listbox.git"
   },
+  "license": "MIT",
   "keywords": [
     "angular",
     "dual-listbox",
+    "transfer-list",
+    "angular-library",
+    "custom-ui",
+    "listbox",
+    "typescript",
     "component",
-    "ui",
-    "picklist"
+    "angular-component"
   ],
+  "sideEffects": false,
   "peerDependencies": {
-    "@angular/core": ">=20.0.0 <22.0.0",
-    "@angular/common": ">=20.0.0 <22.0.0"
+    "@angular/core": "^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0",
+    "@angular/common": "^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0"
+  },
+  "dependencies": {},
+  "module": "fesm2022/dual-listbox.mjs",
+  "typings": "dual-listbox.d.ts",
+  "exports": {
+    ".": {
+      "import": "./fesm2022/dual-listbox.mjs",
+      "require": "./fesm2022/dual-listbox.js",
+      "types": "./dual-listbox.d.ts"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
