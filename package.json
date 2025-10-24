@@ -1,7 +1,7 @@
 {
   "name": "dual-listbox-workspace",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve demo-app",
@@ -9,7 +9,8 @@
     "build:lib": "ng build dual-listbox --configuration production",
     "pack:lib": "npm run build:lib && (cd dist/dual-listbox && npm pack)",
     "test": "ng test --watch=false --browsers=ChromeHeadlessCI",
-    "lint": "ng lint"
+    "lint": "ng lint dual-listbox",
+    "release": "npm run build:lib && cd dist/dual-listbox && npm publish --access public"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^20.3.7",
