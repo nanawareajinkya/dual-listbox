@@ -10,40 +10,63 @@ on:
   push:
     branches: [main]
     tags:
-      - 'v*' # Auto-publish on version tags (e.g., v1.0.0)
+      - 'v*' # Auto-publish when version tags like v1.0.0 are pushed
+  pull_request:
+    branches: [main]
 
 jobs:
   build:
-    name: Build & Verify
+    name: 🧱 Build & Verify
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [20.x] # ✅ Angular 20 compatible Node version
 
     steps:
+      # -------------------------------------------------------------
+      # 1️⃣ Checkout repository
+      # -------------------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      # -------------------------------------------------------------
+      # 2️⃣ Setup Node.js
+      # -------------------------------------------------------------
+      - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
+      # -------------------------------------------------------------
+      # 3️⃣ Install dependencies
+      # -------------------------------------------------------------
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
 
+      # -------------------------------------------------------------
+      # 4️⃣ Run ESLint (non-blocking)
+      # -------------------------------------------------------------
       - name: Run ESLint (non-blocking)
         run: |
           npm run lint --if-present || echo "✅ Non-blocking lint warnings ignored."
 
+      # -------------------------------------------------------------
+      # 5️⃣ Build Angular library
+      # -------------------------------------------------------------
       - name: Build Angular library
         run: npm run build:lib
 
-      - name: Skip tests (library only)
+      # -------------------------------------------------------------
+      # 6️⃣ Skip tests (library-only project)
+      # -------------------------------------------------------------
+      - name: Skip tests
         run: echo "🧪 No unit tests configured — skipping."
 
+      # -------------------------------------------------------------
+      # 7️⃣ Upload build artifacts
+      # -------------------------------------------------------------
       - name: Upload dist artifact
         if: success()
         uses: actions/upload-artifact@v4
@@ -51,16 +74,25 @@ jobs:
           name: dual-listbox-dist
           path: dist/dual-listbox/
 
+  # ===================================================================
+  # Publish job (runs only on version tags like v1.0.0)
+  # ===================================================================
   publish:
-    name: Publish to npm (on tagged release)
+    name:  Publish to npm (on tagged release)
     needs: build
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
 
     steps:
+      # -------------------------------------------------------------
+      # 1️⃣ Checkout repository again (fresh for publish)
+      # -------------------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # -------------------------------------------------------------
+      # 2️⃣ Setup Node.js for npm publish
+      # -------------------------------------------------------------
       - name: Setup Node.js for npm publish
         uses: actions/setup-node@v4
         with:
@@ -68,9 +100,17 @@ jobs:
           registry-url: https://registry.npmjs.org/
           always-auth: true
 
+      # -------------------------------------------------------------
+      # 3️⃣ Install and build
+      # -------------------------------------------------------------
       - name: Install and build
-        run: npm ci --legacy-peer-deps && npm run build:lib
+        run: |
+          npm ci --legacy-peer-deps
+          npm run build:lib
 
+      # -------------------------------------------------------------
+      # 4️⃣ Verify build and version consistency
+      # -------------------------------------------------------------
       - name: Verify build output and version
         run: |
           if [ ! -d "dist/dual-listbox" ]; then
@@ -87,10 +127,20 @@ jobs:
             echo "❌ Version mismatch between tag and package.json"
             exit 1
           fi
+          echo "✅ Version check passed."
 
-      - name: Publish package
+      # -------------------------------------------------------------
+      # 5️⃣ Publish to npm
+      # -------------------------------------------------------------
+      - name: Publish package to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           cd dist/dual-listbox
           npm publish --access public
+
+      # -------------------------------------------------------------
+      # 6️⃣ Success notification
+      # -------------------------------------------------------------
+      - name: Confirm publish success
+        run: echo "🎉 Successfully published @nanawareajinkya/dual-listbox to npm!"
