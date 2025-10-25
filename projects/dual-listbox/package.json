@@ -1,6 +1,6 @@
 {
   "name": "@nanawareajinkya/dual-listbox",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A modern, lightweight, and customizable dual listbox component for Angular 17+ — built with accessibility, performance, and minimal dependencies in mind.",
   "author": {
     "name": "Ajinkya Nanaware",
