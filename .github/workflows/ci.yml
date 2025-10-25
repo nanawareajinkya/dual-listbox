@@ -1,5 +1,6 @@
 # ===================================================================
-# Continuous Integration for @nanawareajinkya/dual-listbox
+# Continuous Integration & Auto-Publish
+# for @nanawareajinkya/dual-listbox
 # Built and maintained by Ajinkya Nanaware
 # ===================================================================
 
@@ -8,8 +9,8 @@ name: CI
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
+    tags:
+      - 'v*' # For auto-publish when version tags are pushed (e.g., v1.0.0)
 
 jobs:
   build:
@@ -18,52 +19,38 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.x] # ✅ Angular 20 compatible Node version
+        node-version: [20.x]
 
     steps:
-      # -------------------------------------------------------------
-      # 1️⃣ Checkout repository
-      # -------------------------------------------------------------
+      # 1️⃣ Checkout code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # -------------------------------------------------------------
-      # 2️⃣ Setup Node.js + npm caching
-      # -------------------------------------------------------------
+      # 2️⃣ Setup Node.js
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
-      # -------------------------------------------------------------
-      # 3️⃣ Install dependencies (handle peer conflicts safely)
-      # -------------------------------------------------------------
+      # 3️⃣ Install dependencies
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
 
-      # -------------------------------------------------------------
-      # 4️⃣ Lint (non-blocking)
-      # -------------------------------------------------------------
-      - name: Run ESLint (non-blocking)
+      # 4️⃣ Run lint (non-blocking)
+      - name: Run ESLint
         run: |
-          npm run lint --if-present || echo "✅ Lint warnings ignored (no blocking issues found)."
+          npm run lint --if-present || echo "✅ Non-blocking lint warnings ignored."
 
-      # -------------------------------------------------------------
       # 5️⃣ Build Angular library
-      # -------------------------------------------------------------
       - name: Build Angular library
         run: npm run build:lib
 
-      # -------------------------------------------------------------
-      # 6️⃣ Run unit tests (skipped — library-only project)
-      # -------------------------------------------------------------
-      - name: Skip tests
-        run: echo "🧪 No tests configured — skipping test phase."
+      # 6️⃣ (Optional) Test placeholder
+      - name: Skip tests (library only)
+        run: echo "🧪 No unit tests configured — skipping."
 
-      # -------------------------------------------------------------
-      # 7️⃣ Upload compiled dist folder for inspection
-      # -------------------------------------------------------------
+      # 7️⃣ Upload dist as build artifact
       - name: Upload dist artifact
         if: success()
         uses: actions/upload-artifact@v4
@@ -71,11 +58,28 @@ jobs:
           name: dual-listbox-dist
           path: dist/dual-listbox/
 
-      # -------------------------------------------------------------
-      # 8️⃣ Auto-publish on version tag push (optional)
-      # -------------------------------------------------------------
-      # - name: Publish to npm
-      #   if: startsWith(github.ref, 'refs/tags/v')
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      #   run: npm publish --access public
+  publish:
+    name: Publish to npm (on tagged release)
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js for npm publish
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install and build
+        run: npm ci --legacy-peer-deps && npm run build:lib
+
+      - name: Publish package
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          cd dist/dual-listbox
+          npm publish --access public
