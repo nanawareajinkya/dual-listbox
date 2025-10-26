@@ -10,7 +10,7 @@
   "homepage": "https://github.com/nanawareajinkya/dual-listbox#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nanawareajinkya/dual-listbox.git"
+    "url": "git+https://github.com/nanawareajinkya/dual-listbox.git"
   },
   "license": "MIT",
   "keywords": [
@@ -29,7 +29,6 @@
     "@angular/core": "^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0",
     "@angular/common": "^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0"
   },
-  "dependencies": {},
   "module": "fesm2022/dual-listbox.mjs",
   "main": "fesm2022/dual-listbox.js",
   "typings": "dual-listbox.d.ts",
